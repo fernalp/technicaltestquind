@@ -1,6 +1,5 @@
 package io.quind.technicaltesthexagonal.customer.domain.dtos;
 
-import io.quind.technicaltesthexagonal.customer.domain.models.IdType;
 import lombok.Builder;
 import lombok.Data;
 

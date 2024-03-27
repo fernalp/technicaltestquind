@@ -2,7 +2,6 @@ package io.quind.technicaltesthexagonal.modules.customer.application.usecases;
 
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerResponse;
 import io.quind.technicaltesthexagonal.modules.customer.domain.mappers.CustomerMapper;
-import io.quind.technicaltesthexagonal.modules.customer.domain.models.Customer;
 import io.quind.technicaltesthexagonal.modules.customer.domain.ports.in.RetrieveCustomerUseCase;
 import io.quind.technicaltesthexagonal.modules.customer.domain.ports.out.CustomerRepositoryPort;
 

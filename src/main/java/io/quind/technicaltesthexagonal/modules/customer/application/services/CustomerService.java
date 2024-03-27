@@ -1,10 +1,12 @@
-package io.quind.technicaltesthexagonal.customer.application.services;
+package io.quind.technicaltesthexagonal.modules.customer.application.services;
 
-import io.quind.technicaltesthexagonal.customer.domain.models.Customer;
-import io.quind.technicaltesthexagonal.customer.domain.ports.in.CreateCustomerUseCase;
-import io.quind.technicaltesthexagonal.customer.domain.ports.in.DeleteCustomerUseCase;
-import io.quind.technicaltesthexagonal.customer.domain.ports.in.RetrieveCustomerUseCase;
-import io.quind.technicaltesthexagonal.customer.domain.ports.in.UpdateCustomerUseCase;
+import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerRequest;
+import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerResponse;
+import io.quind.technicaltesthexagonal.modules.customer.domain.models.Customer;
+import io.quind.technicaltesthexagonal.modules.customer.domain.ports.in.CreateCustomerUseCase;
+import io.quind.technicaltesthexagonal.modules.customer.domain.ports.in.DeleteCustomerUseCase;
+import io.quind.technicaltesthexagonal.modules.customer.domain.ports.in.RetrieveCustomerUseCase;
+import io.quind.technicaltesthexagonal.modules.customer.domain.ports.in.UpdateCustomerUseCase;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,8 +26,8 @@ public class CustomerService implements CreateCustomerUseCase, RetrieveCustomerU
     }
 
     @Override
-    public Customer createCustomer(Customer customer) {
-        return createCustomerUseCase.createCustomer(customer);
+    public CustomerResponse createCustomer(CustomerRequest customerRequest) {
+        return createCustomerUseCase.createCustomer(customerRequest);
     }
 
     @Override
@@ -34,17 +36,17 @@ public class CustomerService implements CreateCustomerUseCase, RetrieveCustomerU
     }
 
     @Override
-    public Optional<Customer> getCustomer(Long id) {
+    public Optional<CustomerResponse> getCustomer(Long id) {
         return retrieveCustomerUseCase.getCustomer(id);
     }
 
     @Override
-    public List<Customer> getAllCustomer() {
+    public List<CustomerResponse> getAllCustomer() {
         return retrieveCustomerUseCase.getAllCustomer();
     }
 
     @Override
-    public Optional<Customer> updateCustomer(Long id, Customer customer) {
+    public CustomerResponse updateCustomer(Long id, Customer customer) {
         return updateCustomerUseCase.updateCustomer(id, customer);
     }
 }

@@ -1,4 +1,4 @@
-package io.quind.technicaltesthexagonal.customer.domain.dtos;
+package io.quind.technicaltesthexagonal.modules.customer.domain.dtos;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,5 +8,8 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Data
 public class CustomerResponse extends CustomerRequest{
-    private Long customerId;
+    private Long id;
+
 }
+
+

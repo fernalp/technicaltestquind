@@ -1,7 +1,7 @@
-package io.quind.technicaltesthexagonal.customer.application.usecases;
+package io.quind.technicaltesthexagonal.modules.customer.application.usecases;
 
-import io.quind.technicaltesthexagonal.customer.domain.ports.in.DeleteCustomerUseCase;
-import io.quind.technicaltesthexagonal.customer.domain.ports.out.CustomerRepositoryPort;
+import io.quind.technicaltesthexagonal.modules.customer.domain.ports.in.DeleteCustomerUseCase;
+import io.quind.technicaltesthexagonal.modules.customer.domain.ports.out.CustomerRepositoryPort;
 
 public class DeleteCustomerUseCaseImpl implements DeleteCustomerUseCase {
 

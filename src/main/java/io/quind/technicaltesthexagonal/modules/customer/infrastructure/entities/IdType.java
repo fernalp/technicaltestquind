@@ -1,4 +1,4 @@
-package io.quind.technicaltesthexagonal.customer.domain.models;
+package io.quind.technicaltesthexagonal.modules.customer.infrastructure.entities;
 
 public enum IdType {
     CC("Cédula de Ciudadanía"),

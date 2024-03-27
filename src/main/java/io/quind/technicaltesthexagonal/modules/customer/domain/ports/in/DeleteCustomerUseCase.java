@@ -1,4 +1,4 @@
-package io.quind.technicaltesthexagonal.customer.domain.ports.in;
+package io.quind.technicaltesthexagonal.modules.customer.domain.ports.in;
 
 public interface DeleteCustomerUseCase {
 

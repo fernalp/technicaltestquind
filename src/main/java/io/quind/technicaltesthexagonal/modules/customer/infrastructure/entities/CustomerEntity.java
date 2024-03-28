@@ -1,17 +1,24 @@
 package io.quind.technicaltesthexagonal.modules.customer.infrastructure.entities;
 
+import io.quind.technicaltesthexagonal.modules.customer.domain.models.IdType;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.Length;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
-@Data
 @Table(name = "tb_customers")
+@Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CustomerEntity {
 
     @Id
@@ -24,22 +31,34 @@ public class CustomerEntity {
     @Enumerated(EnumType.STRING)
     private IdType idType;
     @Column(unique = true, nullable = false)
-    private Integer idNumber;
+    @Length(min = 6, max = 15)
+    private String idNumber;
     @Column(nullable = false)
+    @Length(min = 2, message = "Firstname is short")
     private String firstname;
     @Column(nullable = false)
+    @Length(min = 2, message = "Firstname is short")
     private String lastname;
     @Column(nullable = false, unique = true)
+    @Pattern(
+            regexp = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$",
+            message = "Email is not valid"
+    )
     private String email;
+    @Temporal(TemporalType.DATE)
     @Column
-    private Date birthdate;
+    private LocalDate birthdate;
     @Temporal(TemporalType.DATE)
     @CreationTimestamp
     @Column(
             updatable = false, nullable = false
     )
-    private Date createdAt;
+    private LocalDate createdAt;
     @Temporal(TemporalType.DATE)
     @UpdateTimestamp
-    private Date updatedAt;
+    @Column(
+            nullable = false
+    )
+    private LocalDate updatedAt;
+
 }

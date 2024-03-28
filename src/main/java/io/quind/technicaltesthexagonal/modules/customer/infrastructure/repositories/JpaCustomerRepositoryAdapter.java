@@ -3,6 +3,7 @@ package io.quind.technicaltesthexagonal.modules.customer.infrastructure.reposito
 import io.quind.technicaltesthexagonal.modules.customer.domain.models.Customer;
 import io.quind.technicaltesthexagonal.modules.customer.domain.ports.out.CustomerRepositoryPort;
 import io.quind.technicaltesthexagonal.modules.customer.infrastructure.entities.CustomerEntity;
+import io.quind.technicaltesthexagonal.modules.customer.domain.models.IdType;
 import io.quind.technicaltesthexagonal.modules.customer.infrastructure.mappers.CustomerEntityMapper;
 import org.springframework.stereotype.Component;
 
@@ -37,9 +38,16 @@ public class JpaCustomerRepositoryAdapter implements CustomerRepositoryPort {
     }
 
     @Override
-    public Customer update(Customer customer) {
-        CustomerEntity customerEntity = CustomerEntityMapper.fromCustomer(customer);
-        return CustomerEntityMapper.toCustomer(jpaCustomerRepository.save(customerEntity));
+    public Customer update(Long id, Customer customer) {
+        CustomerEntity customerEntity = jpaCustomerRepository.findById(id).get();
+        customerEntity.setBirthdate(customer.getBirthdate());
+        customerEntity.setEmail(customer.getEmail());
+        customerEntity.setFirstname(customer.getFirstname());
+        customerEntity.setLastname(customerEntity.getLastname());
+        customerEntity.setIdNumber(customer.getIdNumber());
+        customerEntity.setIdType(customer.getIdType());
+        jpaCustomerRepository.save(customerEntity);
+        return CustomerEntityMapper.toCustomer(customerEntity);
     }
 
     @Override

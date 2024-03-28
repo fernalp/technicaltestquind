@@ -1,15 +1,21 @@
 package io.quind.technicaltesthexagonal.modules.customer.domain.dtos;
 
+import io.quind.technicaltesthexagonal.modules.customer.domain.models.IdType;
+import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.SuperBuilder;
 
-@EqualsAndHashCode(callSuper = true)
-@SuperBuilder
+import java.time.LocalDate;
+
 @Data
-public class CustomerResponse extends CustomerRequest{
+@Builder
+public class CustomerResponse{
     private Long id;
-
+    private IdType idType;
+    private String idNumber;
+    private String firstname;
+    private String lastname;
+    private String email;
+    private LocalDate dateOfBirth;
 }
 
 

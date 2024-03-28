@@ -8,24 +8,24 @@ public class CustomerMapper {
 
     public static Customer fromCustomerRequest(CustomerRequest customerRequest){
         return Customer.builder()
-                .idType(customerRequest.getTipoIdentificacion())
-                .idNumber(customerRequest.getNumeroIdentificacion())
-                .firstname(customerRequest.getNombres())
-                .lastname(customerRequest.getApellidos())
-                .email(customerRequest.getCorreoElectronico())
-                .birthdate(customerRequest.getFechaNacimiento())
+                .idType(customerRequest.getIdType())
+                .idNumber(customerRequest.getIdNumber())
+                .firstname(customerRequest.getFirstname().trim().toLowerCase())
+                .lastname(customerRequest.getLastname().trim().toLowerCase())
+                .email(customerRequest.getEmail().trim().toLowerCase())
+                .birthdate(customerRequest.getDateOfBirth())
                 .build();
     }
 
     public static CustomerResponse toCustomerResponse(Customer customer){
-        return (CustomerResponse) CustomerResponse.builder()
-                .id(customer.getCustomerId())
-                .tipoIdentificacion(customer.getIdType())
-                .numeroIdentificacion(customer.getIdNumber())
-                .nombres(customer.getFirstname())
-                .apellidos(customer.getLastname())
-                .correoElectronico(customer.getEmail())
-                .fechaNacimiento(customer.getBirthdate())
+        return CustomerResponse.builder()
+                .id(customer.getId())
+                .idType(customer.getIdType())
+                .idNumber(customer.getIdNumber())
+                .firstname(customer.getFirstname())
+                .lastname(customer.getLastname())
+                .email(customer.getEmail())
+                .dateOfBirth(customer.getBirthdate())
                 .build();
     }
 }

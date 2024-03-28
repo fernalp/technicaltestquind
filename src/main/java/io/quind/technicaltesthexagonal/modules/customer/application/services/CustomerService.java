@@ -2,12 +2,14 @@ package io.quind.technicaltesthexagonal.modules.customer.application.services;
 
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerRequest;
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerResponse;
-import io.quind.technicaltesthexagonal.modules.customer.domain.models.Customer;
 import io.quind.technicaltesthexagonal.modules.customer.domain.ports.in.CreateCustomerUseCase;
 import io.quind.technicaltesthexagonal.modules.customer.domain.ports.in.DeleteCustomerUseCase;
 import io.quind.technicaltesthexagonal.modules.customer.domain.ports.in.RetrieveCustomerUseCase;
 import io.quind.technicaltesthexagonal.modules.customer.domain.ports.in.UpdateCustomerUseCase;
 
+
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,8 +28,12 @@ public class CustomerService implements CreateCustomerUseCase, RetrieveCustomerU
     }
 
     @Override
-    public CustomerResponse createCustomer(CustomerRequest customerRequest) {
-        return createCustomerUseCase.createCustomer(customerRequest);
+    public Optional<CustomerResponse> createCustomer(CustomerRequest customerRequest) {
+        int age = calculateAge(customerRequest.getDateOfBirth(), LocalDate.now());
+        if (age >= 18){
+            return createCustomerUseCase.createCustomer(customerRequest);
+        }
+        return Optional.empty();
     }
 
     @Override
@@ -46,7 +52,16 @@ public class CustomerService implements CreateCustomerUseCase, RetrieveCustomerU
     }
 
     @Override
-    public CustomerResponse updateCustomer(Long id, Customer customer) {
-        return updateCustomerUseCase.updateCustomer(id, customer);
+    public Optional<CustomerResponse> updateCustomer(Long id, CustomerRequest customerRequest) {
+        int age = calculateAge(customerRequest.getDateOfBirth(), LocalDate.now());
+        if (age >= 18){
+            return updateCustomerUseCase.updateCustomer(id, customerRequest);
+        }
+        return Optional.empty();
+    }
+
+    private static int calculateAge(LocalDate birthdayDate, LocalDate currentDate){
+        Period period = Period.between(birthdayDate, currentDate);
+        return period.getYears();
     }
 }

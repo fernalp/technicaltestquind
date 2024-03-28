@@ -10,7 +10,7 @@ public interface CustomerRepositoryPort {
     Customer save(Customer customer);
     Optional<Customer> findById(Long id);
     List<Customer> findAll();
-    Customer update(Customer customer);
+    Customer update(Long id, Customer customer);
     boolean deleteById(Long id);
 
 }

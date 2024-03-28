@@ -1,18 +1,19 @@
 package io.quind.technicaltesthexagonal.modules.customer.domain.dtos;
 
+import io.quind.technicaltesthexagonal.modules.customer.domain.models.IdType;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Builder
 public class CustomerRequest {
-    private String tipoIdentificacion;
-    private Integer numeroIdentificacion;
-    private String nombres;
-    private String apellidos;
-    private String correoElectronico;
-    private Date fechaNacimiento;
+    private IdType idType;
+    private String idNumber;
+    private String firstname;
+    private String lastname;
+    private String email;
+    private LocalDate dateOfBirth;
 
 }

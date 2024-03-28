@@ -7,6 +7,8 @@ import io.quind.technicaltesthexagonal.modules.customer.domain.models.Customer;
 import io.quind.technicaltesthexagonal.modules.customer.domain.ports.in.CreateCustomerUseCase;
 import io.quind.technicaltesthexagonal.modules.customer.domain.ports.out.CustomerRepositoryPort;
 
+import java.util.Optional;
+
 public class CreateCustomerUseCaseImpl implements CreateCustomerUseCase {
 
     private final CustomerRepositoryPort customerRepositoryPort;
@@ -16,9 +18,11 @@ public class CreateCustomerUseCaseImpl implements CreateCustomerUseCase {
     }
 
     @Override
-    public CustomerResponse createCustomer(CustomerRequest customerRequest) {
-        Customer customer = CustomerMapper.fromCustomerRequest(customerRequest);
-        return CustomerMapper.toCustomerResponse(customerRepositoryPort.save(customer));
+    public Optional<CustomerResponse> createCustomer(CustomerRequest customerRequest) {
+            Customer customer = CustomerMapper.fromCustomerRequest(customerRequest);
+            return Optional.ofNullable(customerRepositoryPort.save(customer)).map(CustomerMapper::toCustomerResponse);
     }
+
+
 
 }

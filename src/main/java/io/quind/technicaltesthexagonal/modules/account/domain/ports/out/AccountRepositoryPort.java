@@ -11,7 +11,8 @@ public interface AccountRepositoryPort {
     Optional<Account> findById(Long id);
     Optional<Account> findByAccountNumber(String accountNumber);
     List<Account> findAll();
-    List<Account> findAllByCustomerByIdNumber(String idNumber);
-    Account update(Long id, Account account);
+    List<Account> findAllByCustomerById(Long id);
+    boolean existsByAccountNumber(String accountNumber);
+    Account update(Account account);
     boolean deleteById(Long id);
 }

@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum AccountType {
-    CTA_CHECKING ("Cuenta Corriente"),
-    CTA_SAVINGS ("Cuenta de Ahorros");
+    ACC_CHECKING("Cuenta Corriente"),
+    ACC_SAVINGS ("Cuenta de Ahorros");
 
     private final String description;
 

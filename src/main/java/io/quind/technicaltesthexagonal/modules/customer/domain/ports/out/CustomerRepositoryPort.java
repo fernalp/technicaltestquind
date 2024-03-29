@@ -8,9 +8,9 @@ import java.util.Optional;
 public interface CustomerRepositoryPort {
 
     Customer save(Customer customer);
+    boolean existById(Long id);
     Optional<Customer> findById(Long id);
     List<Customer> findAll();
-    Customer update(Long id, Customer customer);
     boolean deleteById(Long id);
 
 }

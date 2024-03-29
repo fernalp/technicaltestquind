@@ -12,9 +12,4 @@ import org.springframework.stereotype.Repository;
 public interface JpaCustomerRepository extends JpaRepository<CustomerEntity, Long> {
 
 
-    @Transactional
-    @Modifying()
-    @Query("UPDATE CustomerEntity ce SET ce.email = :email WHERE ce.customerId = :id")
-    void update(@Param("id") long id,@Param("email") String email);
-
 }

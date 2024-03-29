@@ -1,8 +1,11 @@
 package io.quind.technicaltesthexagonal.modules.customer.domain.mappers;
 
+import io.quind.technicaltesthexagonal.modules.account.domain.mappers.AccountMapper;
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerRequest;
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerResponse;
 import io.quind.technicaltesthexagonal.modules.customer.domain.models.Customer;
+
+import java.util.stream.Collectors;
 
 public class CustomerMapper {
 
@@ -13,7 +16,7 @@ public class CustomerMapper {
                 .firstname(customerRequest.getFirstname().trim().toLowerCase())
                 .lastname(customerRequest.getLastname().trim().toLowerCase())
                 .email(customerRequest.getEmail().trim().toLowerCase())
-                .birthdate(customerRequest.getDateOfBirth())
+                .dateOfBirth(customerRequest.getDateOfBirth())
                 .build();
     }
 
@@ -25,7 +28,7 @@ public class CustomerMapper {
                 .firstname(customer.getFirstname())
                 .lastname(customer.getLastname())
                 .email(customer.getEmail())
-                .dateOfBirth(customer.getBirthdate())
+                .dateOfBirth(customer.getDateOfBirth())
                 .build();
     }
 }

@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/customers")
@@ -22,9 +21,11 @@ public class CustomerController {
 
     @PostMapping()
     public ResponseEntity<CustomerResponse> createCustomer(@RequestBody CustomerRequest customerRequest){
-        return customerService.createCustomer(customerRequest)
-                .map(customerResponse -> ResponseEntity.status(HttpStatus.CREATED).body(customerResponse))
-                .orElse(ResponseEntity.badRequest().build());
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(customerService.createCustomer(customerRequest));
+        }catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     @GetMapping()
@@ -38,24 +39,26 @@ public class CustomerController {
 
     @GetMapping("/{customerId}")
     public ResponseEntity<CustomerResponse> getCustomerById(@PathVariable("customerId") Long id){
-        return customerService.getCustomer(id)
+        return customerService.getCustomerById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @PutMapping("/{customerId}")
     public ResponseEntity<CustomerResponse> updateCustomer(@PathVariable("customerId") Long id, @RequestBody CustomerRequest customerRequest){
+        System.out.println(customerRequest);
 
-        return customerService
-                .updateCustomer(id, customerRequest)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.badRequest().build());
+        try {
+            return ResponseEntity.ok(customerService.updateCustomer(id, customerRequest));
+        }catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
 
     }
 
     @DeleteMapping("/{customerId}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable("customerId") Long id){
-        if (customerService.getCustomer(id).isPresent()){
+        if (customerService.getCustomerById(id).isPresent()){
             customerService.deleteCustomer(id);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }

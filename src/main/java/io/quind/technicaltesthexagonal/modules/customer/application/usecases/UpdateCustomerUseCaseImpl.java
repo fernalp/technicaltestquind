@@ -1,5 +1,6 @@
 package io.quind.technicaltesthexagonal.modules.customer.application.usecases;
 
+import io.quind.technicaltesthexagonal.modules.customer.application.utils.UtilsCustomer;
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerRequest;
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerResponse;
 import io.quind.technicaltesthexagonal.modules.customer.domain.mappers.CustomerMapper;
@@ -18,8 +19,20 @@ public class UpdateCustomerUseCaseImpl implements UpdateCustomerUseCase {
     }
 
     @Override
-    public Optional<CustomerResponse > updateCustomer(Long id, CustomerRequest customerRequest) {
-        Customer customer = CustomerMapper.fromCustomerRequest(customerRequest);
-        return Optional.ofNullable(CustomerMapper.toCustomerResponse(customerRepositoryPort.update(id, customer)));
+    public CustomerResponse updateCustomer(Long id, CustomerRequest customerRequest) {
+        UtilsCustomer.validateCustomerRequest(customerRequest);
+        Optional<Customer> customer = customerRepositoryPort.findById(id);
+        if (customer.isPresent()) {
+            Customer customerUpdated = customer.get();
+            customerUpdated.setFirstname(customerRequest.getFirstname());
+            customerUpdated.setLastname(customerRequest.getLastname());
+            customerUpdated.setIdType(customerRequest.getIdType());
+            customerUpdated.setIdNumber(customerRequest.getIdNumber());
+            customerUpdated.setEmail(customerRequest.getEmail());
+            customerUpdated.setDateOfBirth(customerRequest.getDateOfBirth());
+            return CustomerMapper.toCustomerResponse(customerRepositoryPort.save(customerUpdated));
+        }
+        throw new IllegalArgumentException("There is no client with that id");
+
     }
 }

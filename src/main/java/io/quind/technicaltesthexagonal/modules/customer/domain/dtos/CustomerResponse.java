@@ -1,10 +1,12 @@
 package io.quind.technicaltesthexagonal.modules.customer.domain.dtos;
 
+import io.quind.technicaltesthexagonal.modules.account.domain.dtos.AccountResponse;
 import io.quind.technicaltesthexagonal.modules.customer.domain.models.IdType;
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Builder

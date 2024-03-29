@@ -28,12 +28,12 @@ public class CustomerService implements CreateCustomerUseCase, RetrieveCustomerU
     }
 
     @Override
-    public Optional<CustomerResponse> createCustomer(CustomerRequest customerRequest) {
-        int age = calculateAge(customerRequest.getDateOfBirth(), LocalDate.now());
-        if (age >= 18){
+    public CustomerResponse createCustomer(CustomerRequest customerRequest) {
+        try{
             return createCustomerUseCase.createCustomer(customerRequest);
+        }catch (Exception e){
+            throw new RuntimeException(e.getMessage());
         }
-        return Optional.empty();
     }
 
     @Override
@@ -42,8 +42,8 @@ public class CustomerService implements CreateCustomerUseCase, RetrieveCustomerU
     }
 
     @Override
-    public Optional<CustomerResponse> getCustomer(Long id) {
-        return retrieveCustomerUseCase.getCustomer(id);
+    public Optional<CustomerResponse> getCustomerById(Long id) {
+        return retrieveCustomerUseCase.getCustomerById(id);
     }
 
     @Override
@@ -52,16 +52,13 @@ public class CustomerService implements CreateCustomerUseCase, RetrieveCustomerU
     }
 
     @Override
-    public Optional<CustomerResponse> updateCustomer(Long id, CustomerRequest customerRequest) {
-        int age = calculateAge(customerRequest.getDateOfBirth(), LocalDate.now());
-        if (age >= 18){
+    public CustomerResponse updateCustomer(Long id, CustomerRequest customerRequest) {
+        try {
             return updateCustomerUseCase.updateCustomer(id, customerRequest);
+        }catch (Exception e){
+            throw new RuntimeException(e.getMessage());
         }
-        return Optional.empty();
     }
 
-    private static int calculateAge(LocalDate birthdayDate, LocalDate currentDate){
-        Period period = Period.between(birthdayDate, currentDate);
-        return period.getYears();
-    }
+
 }

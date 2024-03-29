@@ -1,13 +1,12 @@
 package io.quind.technicaltesthexagonal.modules.customer.application.usecases;
 
+import io.quind.technicaltesthexagonal.modules.customer.application.utils.UtilsCustomer;
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerRequest;
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerResponse;
 import io.quind.technicaltesthexagonal.modules.customer.domain.mappers.CustomerMapper;
 import io.quind.technicaltesthexagonal.modules.customer.domain.models.Customer;
 import io.quind.technicaltesthexagonal.modules.customer.domain.ports.in.CreateCustomerUseCase;
 import io.quind.technicaltesthexagonal.modules.customer.domain.ports.out.CustomerRepositoryPort;
-
-import java.util.Optional;
 
 public class CreateCustomerUseCaseImpl implements CreateCustomerUseCase {
 
@@ -18,9 +17,10 @@ public class CreateCustomerUseCaseImpl implements CreateCustomerUseCase {
     }
 
     @Override
-    public Optional<CustomerResponse> createCustomer(CustomerRequest customerRequest) {
-            Customer customer = CustomerMapper.fromCustomerRequest(customerRequest);
-            return Optional.ofNullable(customerRepositoryPort.save(customer)).map(CustomerMapper::toCustomerResponse);
+    public CustomerResponse createCustomer(CustomerRequest customerRequest) {
+        UtilsCustomer.validateCustomerRequest(customerRequest);
+        Customer customer = CustomerMapper.fromCustomerRequest(customerRequest);
+        return CustomerMapper.toCustomerResponse(customerRepositoryPort.save(customer));
     }
 
 

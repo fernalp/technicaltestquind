@@ -1,5 +1,6 @@
 package io.quind.technicaltesthexagonal.modules.account.domain.dtos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.quind.technicaltesthexagonal.modules.account.domain.models.AccountStatus;
 import io.quind.technicaltesthexagonal.modules.account.domain.models.AccountType;
 import io.quind.technicaltesthexagonal.modules.customer.domain.models.Customer;
@@ -17,5 +18,5 @@ public class AccountResponse {
     private AccountStatus accountStatus;
     private BigDecimal balance;
     private boolean gmfExempt;
-    private Customer customer;
+    private Long customerId;
 }

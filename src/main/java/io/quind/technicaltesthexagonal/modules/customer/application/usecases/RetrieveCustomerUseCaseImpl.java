@@ -18,7 +18,7 @@ public class RetrieveCustomerUseCaseImpl implements RetrieveCustomerUseCase {
     }
 
     @Override
-    public Optional<CustomerResponse> getCustomer(Long id) {
+    public Optional<CustomerResponse> getCustomerById(Long id) {
         return customerRepositoryPort.findById(id).map(CustomerMapper::toCustomerResponse);
     }
 

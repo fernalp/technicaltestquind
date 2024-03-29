@@ -3,6 +3,7 @@ package io.quind.technicaltesthexagonal.modules.account.domain.mappers;
 import io.quind.technicaltesthexagonal.modules.account.domain.dtos.AccountRequest;
 import io.quind.technicaltesthexagonal.modules.account.domain.dtos.AccountResponse;
 import io.quind.technicaltesthexagonal.modules.account.domain.models.Account;
+import io.quind.technicaltesthexagonal.modules.customer.domain.models.Customer;
 
 public class AccountMapper {
 
@@ -12,7 +13,7 @@ public class AccountMapper {
                 .accountType(accountRequest.getAccountType())
                 .balance(accountRequest.getBalance())
                 .gmfExempt(accountRequest.isGmfExempt())
-                .customer(accountRequest.getCustomer())
+                .customerId(accountRequest.getCustomerId())
                 .build();
 
     }
@@ -25,7 +26,7 @@ public class AccountMapper {
                 .balance(account.getBalance())
                 .accountStatus(account.getAccountStatus())
                 .gmfExempt(account.isGmfExempt())
-                .customer(account.getCustomer())
+                .customerId(account.getCustomer().getId())
                 .build();
     }
 

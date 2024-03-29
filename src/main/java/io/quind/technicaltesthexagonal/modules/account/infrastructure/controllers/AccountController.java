@@ -34,19 +34,19 @@ public class AccountController {
         return ResponseEntity.ok(accountResponses);
     }
 
-    @GetMapping("/{accountId}")
-    public ResponseEntity<AccountResponse> getAccountById(@PathVariable("accountId") Long id){
-        return accountService.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
-//    @GetMapping("/{accountNumber}")
-//    public ResponseEntity<AccountResponse> getAccountByAccountNumber(@PathVariable("accountNumber") String accountNumber){
-//        return accountService.findByAccountNumber(accountNumber)
+//    @GetMapping("/{accountId}")
+//    public ResponseEntity<AccountResponse> getAccountById(@PathVariable("accountId") Long id){
+//        return accountService.findById(id)
 //                .map(ResponseEntity::ok)
 //                .orElse(ResponseEntity.notFound().build());
 //    }
+
+    @GetMapping("/{accountNumber}")
+    public ResponseEntity<AccountResponse> getAccountByAccountNumber(@PathVariable("accountNumber") String accountNumber){
+        return accountService.findByAccountNumber(accountNumber)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 
     @PutMapping("/{accountId}")
     public ResponseEntity<AccountResponse> updateAccount(@PathVariable("accountId") Long id, @RequestBody AccountRequest accountRequest){

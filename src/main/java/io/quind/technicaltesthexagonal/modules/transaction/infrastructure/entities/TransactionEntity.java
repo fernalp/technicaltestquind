@@ -26,16 +26,17 @@ public class TransactionEntity {
             nullable = false, updatable = false, scale = 2
     )
     private BigDecimal amount;
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false, length = 50)
+    @Enumerated(EnumType.STRING)
     private TransactionType transactionType;
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp()
     @Column(nullable = false, updatable = false)
     private LocalDateTime date;
     @ManyToOne
-    @JoinColumn(name = "originAccountId", nullable = false, updatable = false)
+    @JoinColumn(name = "origin_account_id", nullable = false, updatable = false)
     private AccountEntity originAccount;
     @ManyToOne
-    @JoinColumn(name = "destinationAccountId", updatable = false)
+    @JoinColumn(name = "destination_account_id", updatable = false)
     private AccountEntity destinationAccount;
 }

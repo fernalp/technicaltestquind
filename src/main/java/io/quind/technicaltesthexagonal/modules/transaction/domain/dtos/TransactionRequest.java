@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 public class TransactionRequest {
     private BigDecimal amount;
     private TransactionType transactionType;
-    private LocalDateTime date;
     private String originAccountId;
     private String destinationAccountId;
 }

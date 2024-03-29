@@ -1,7 +1,5 @@
 package io.quind.technicaltesthexagonal.modules.customer.infrastructure.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.quind.technicaltesthexagonal.modules.account.infrastructure.entities.AccountEntity;
 import io.quind.technicaltesthexagonal.modules.customer.domain.models.IdType;
 import jakarta.persistence.*;

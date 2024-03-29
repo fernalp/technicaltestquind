@@ -5,10 +5,9 @@ import io.quind.technicaltesthexagonal.modules.account.application.usecases.Crea
 import io.quind.technicaltesthexagonal.modules.account.application.usecases.DeleteAccountUseCaseImpl;
 import io.quind.technicaltesthexagonal.modules.account.application.usecases.RetrieveAccountUseCaseImpl;
 import io.quind.technicaltesthexagonal.modules.account.application.usecases.UpdateAccountUseCaseImpl;
-import io.quind.technicaltesthexagonal.modules.account.domain.ports.out.AccountRepositoryPort;;
+import io.quind.technicaltesthexagonal.modules.account.domain.ports.out.AccountRepositoryPort;
 import io.quind.technicaltesthexagonal.modules.account.infrastructure.repositories.JpaAccountRepositoryAdapter;
 import io.quind.technicaltesthexagonal.modules.customer.domain.ports.out.CustomerRepositoryPort;
-import io.quind.technicaltesthexagonal.modules.customer.infrastructure.repositories.JpaCustomerRepositoryAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

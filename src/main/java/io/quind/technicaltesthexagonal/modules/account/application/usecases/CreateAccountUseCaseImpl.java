@@ -12,9 +12,7 @@ import io.quind.technicaltesthexagonal.modules.account.domain.ports.out.AccountR
 import io.quind.technicaltesthexagonal.modules.customer.domain.models.Customer;
 import io.quind.technicaltesthexagonal.modules.customer.domain.ports.out.CustomerRepositoryPort;
 
-import java.math.BigDecimal;
 import java.util.Optional;
-import java.util.Random;
 
 public class CreateAccountUseCaseImpl implements CreateAccountUseCase {
 

@@ -1,5 +1,8 @@
 package io.quind.technicaltesthexagonal.modules.customer.domain.models;
 
+import lombok.Getter;
+
+@Getter
 public enum IdType {
     CC("Cédula de Ciudadanía"),
     NIT("Número de Identificación Tributario"),
@@ -12,7 +15,4 @@ public enum IdType {
         this.description = description;
     }
 
-    public String getDescription() {
-        return description;
-    }
 }

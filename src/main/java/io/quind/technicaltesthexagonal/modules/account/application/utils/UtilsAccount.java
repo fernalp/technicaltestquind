@@ -18,11 +18,10 @@ public class UtilsAccount {
         }
     }
 
-    public static boolean isBalanceGreaterThanZero(BigDecimal balance){
+    public static void isBalanceGreaterThanZero(BigDecimal balance){
         if (balance.compareTo(BigDecimal.ZERO) < 0){
             throw new IllegalArgumentException("The account cannot have negative funds");
         }
-        return true;
     }
 
     private static String generateRandomNumber(){

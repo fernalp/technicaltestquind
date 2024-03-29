@@ -33,9 +33,9 @@ public class TransactionEntity {
     @Column(nullable = false, updatable = false)
     private LocalDateTime date;
     @ManyToOne
-    @JoinColumn(name = "originAccountId", updatable = false)
+    @JoinColumn(name = "originAccountId", nullable = false, updatable = false)
     private AccountEntity originAccount;
     @ManyToOne
-    @JoinColumn(name = "destinationAccountId", nullable = true, updatable = false)
+    @JoinColumn(name = "destinationAccountId", updatable = false)
     private AccountEntity destinationAccount;
 }

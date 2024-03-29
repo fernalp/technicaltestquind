@@ -3,7 +3,6 @@ package io.quind.technicaltesthexagonal.modules.account.infrastructure.controlle
 import io.quind.technicaltesthexagonal.modules.account.application.services.AccountService;
 import io.quind.technicaltesthexagonal.modules.account.domain.dtos.AccountRequest;
 import io.quind.technicaltesthexagonal.modules.account.domain.dtos.AccountResponse;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

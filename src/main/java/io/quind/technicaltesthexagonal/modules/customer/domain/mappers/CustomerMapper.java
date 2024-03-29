@@ -1,11 +1,9 @@
 package io.quind.technicaltesthexagonal.modules.customer.domain.mappers;
 
-import io.quind.technicaltesthexagonal.modules.account.domain.mappers.AccountMapper;
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerRequest;
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerResponse;
 import io.quind.technicaltesthexagonal.modules.customer.domain.models.Customer;
 
-import java.util.stream.Collectors;
 
 public class CustomerMapper {
 

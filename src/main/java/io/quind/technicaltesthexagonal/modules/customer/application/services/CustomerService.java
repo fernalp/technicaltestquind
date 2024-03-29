@@ -8,8 +8,6 @@ import io.quind.technicaltesthexagonal.modules.customer.domain.ports.in.Retrieve
 import io.quind.technicaltesthexagonal.modules.customer.domain.ports.in.UpdateCustomerUseCase;
 
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 

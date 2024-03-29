@@ -3,7 +3,6 @@ package io.quind.technicaltesthexagonal.modules.account.domain.mappers;
 import io.quind.technicaltesthexagonal.modules.account.domain.dtos.AccountRequest;
 import io.quind.technicaltesthexagonal.modules.account.domain.dtos.AccountResponse;
 import io.quind.technicaltesthexagonal.modules.account.domain.models.Account;
-import io.quind.technicaltesthexagonal.modules.customer.domain.models.Customer;
 
 public class AccountMapper {
 

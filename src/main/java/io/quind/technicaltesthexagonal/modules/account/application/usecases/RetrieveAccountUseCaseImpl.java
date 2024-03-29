@@ -2,7 +2,6 @@ package io.quind.technicaltesthexagonal.modules.account.application.usecases;
 
 import io.quind.technicaltesthexagonal.modules.account.domain.dtos.AccountResponse;
 import io.quind.technicaltesthexagonal.modules.account.domain.mappers.AccountMapper;
-import io.quind.technicaltesthexagonal.modules.account.domain.models.Account;
 import io.quind.technicaltesthexagonal.modules.account.domain.ports.in.RetrieveAccountUseCase;
 import io.quind.technicaltesthexagonal.modules.account.domain.ports.out.AccountRepositoryPort;
 

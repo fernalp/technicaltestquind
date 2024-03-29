@@ -6,7 +6,7 @@ import io.quind.technicaltesthexagonal.modules.transaction.domain.ports.in.Creat
 
 public class TransactionService {
 
-    private CreateTransactionUseCase createTransactionUseCase;
+    private final CreateTransactionUseCase createTransactionUseCase;
 
     public TransactionService(CreateTransactionUseCase createTransactionUseCase) {
         this.createTransactionUseCase = createTransactionUseCase;

@@ -3,6 +3,7 @@ package io.quind.technicaltesthexagonal.modules.account.infrastructure.entities;
 import io.quind.technicaltesthexagonal.modules.account.domain.models.AccountStatus;
 import io.quind.technicaltesthexagonal.modules.account.domain.models.AccountType;
 import io.quind.technicaltesthexagonal.modules.customer.infrastructure.entities.CustomerEntity;
+import io.quind.technicaltesthexagonal.modules.transaction.infrastructure.entities.TransactionEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,6 +14,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_accounts")
@@ -47,5 +49,13 @@ public class AccountEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customerId")
     private CustomerEntity customer;
+    @OneToMany(
+            mappedBy = "originAccount"
+    )
+    private List<TransactionEntity> outgoingTransactions;
+    @OneToMany(
+            mappedBy = "destinationAccount"
+    )
+    private List<TransactionEntity> incomingTransactions;
 
 }

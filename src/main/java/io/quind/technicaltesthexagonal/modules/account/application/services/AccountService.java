@@ -26,8 +26,8 @@ public class AccountService implements CreateAccountUseCase, RetrieveAccountUseC
     }
 
     @Override
-    public AccountResponse createCustomer(AccountRequest accountRequest) {
-        return createAccountUseCase.createCustomer(accountRequest);
+    public AccountResponse createAccount(AccountRequest accountRequest) {
+        return createAccountUseCase.createAccount(accountRequest);
     }
 
     @Override

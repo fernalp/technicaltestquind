@@ -15,7 +15,7 @@ public class AccountEntityMapper {
                 .accountStatus(account.getAccountStatus())
                 .balance(account.getBalance())
                 .gmfExempt(account.isGmfExempt())
-                .customer(CustomerEntity.builder().customerId(account.getCustomerId()).build())
+                .customer(CustomerEntityMapper.fromCustomer(account.getCustomer()))
                 .build();
     }
 
@@ -29,7 +29,6 @@ public class AccountEntityMapper {
                 .accountStatus(accountEntity.getAccountStatus())
                 .createdAt(accountEntity.getCreatedAt())
                 .updatedAt(accountEntity.getUpdatedAt())
-                .customerId(accountEntity.getCustomer().getCustomerId())
                 .customer(CustomerEntityMapper.toCustomer(accountEntity.getCustomer()))
                 .build();
     }

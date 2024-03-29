@@ -52,9 +52,9 @@ public class CreateTransactionUseCaseImpl implements CreateTransactionUseCase {
             }
             originAccount.setBalance(newBalanceOrigin);
             destinationAccount.setBalance(newBalanceDestination);
-            transaction.setDestinationAccount(accountRepositoryPort.update(destinationAccount));
+            transaction.setDestinationAccount(accountRepositoryPort.save(destinationAccount));
         }
-        transaction.setOriginAccount(accountRepositoryPort.update(originAccount));
+        transaction.setOriginAccount(accountRepositoryPort.save(originAccount));
         return TransactionMapper.toTransactionResponse(transactionRepositoryPort.createTransaction(transaction));
     }
 
@@ -70,6 +70,7 @@ public class CreateTransactionUseCaseImpl implements CreateTransactionUseCase {
                 .accountStatus(accountOptional.get().getAccountStatus())
                 .balance(accountOptional.get().getBalance())
                 .gmfExempt(accountOptional.get().isGmfExempt())
+                .customerId(accountOptional.get().getCustomerId())
                 .customer(accountOptional.get().getCustomer())
                 .build();
     }

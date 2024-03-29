@@ -26,7 +26,7 @@ public class CreateAccountUseCaseImpl implements CreateAccountUseCase {
 
 
     @Override
-    public AccountResponse createCustomer(AccountRequest accountRequest) {
+    public AccountResponse createAccount(AccountRequest accountRequest) {
 
         Account account = AccountMapper.fromAccountRequest(accountRequest);
         Optional<Customer> customer = customerRepositoryPort.findById(accountRequest.getCustomerId());

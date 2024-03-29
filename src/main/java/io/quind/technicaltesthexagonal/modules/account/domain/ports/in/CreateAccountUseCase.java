@@ -6,6 +6,6 @@ import io.quind.technicaltesthexagonal.modules.account.domain.dtos.AccountRespon
 
 public interface CreateAccountUseCase {
 
-    AccountResponse createCustomer(AccountRequest accountRequest);
+    AccountResponse createAccount(AccountRequest accountRequest);
 
 }

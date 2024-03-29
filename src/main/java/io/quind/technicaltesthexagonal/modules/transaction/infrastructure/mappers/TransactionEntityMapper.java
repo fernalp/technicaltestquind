@@ -2,30 +2,37 @@ package io.quind.technicaltesthexagonal.modules.transaction.infrastructure.mappe
 
 import io.quind.technicaltesthexagonal.modules.account.infrastructure.mappers.AccountEntityMapper;
 import io.quind.technicaltesthexagonal.modules.transaction.domain.models.Transaction;
+import io.quind.technicaltesthexagonal.modules.transaction.domain.models.TransactionType;
 import io.quind.technicaltesthexagonal.modules.transaction.infrastructure.entities.TransactionEntity;
 
 public class TransactionEntityMapper {
 
     public static TransactionEntity fromTransaction(Transaction transaction){
-        return TransactionEntity.builder()
+        TransactionEntity transactionEntity = TransactionEntity.builder()
                 .amount(transaction.getAmount())
                 .transactionType(transaction.getTransactionType())
                 .originAccount(AccountEntityMapper.fromAccount(transaction.getOriginAccount()))
-                .destinationAccount(AccountEntityMapper.fromAccount(transaction.getDestinationAccount()))
                 .build();
+        if (transaction.getTransactionType().equals(TransactionType.TRANSFER)){
+            transactionEntity.setDestinationAccount(AccountEntityMapper.fromAccount(transaction.getDestinationAccount()));
+        }
+        return transactionEntity;
     }
 
     public static Transaction toTransaction(TransactionEntity transactionEntity){
-        return Transaction.builder()
+        Transaction transaction = Transaction.builder()
                 .id(transactionEntity.getId())
                 .amount(transactionEntity.getAmount())
                 .transactionType(transactionEntity.getTransactionType())
                 .date(transactionEntity.getDate())
                 .originAccountId(transactionEntity.getOriginAccount().getAccountNumber())
-                .destinationAccountId("%s".formatted(transactionEntity.getDestinationAccount().getAccountNumber()))
                 .originAccount(AccountEntityMapper.toAccount(transactionEntity.getOriginAccount()))
-                .destinationAccount(AccountEntityMapper.toAccount(transactionEntity.getDestinationAccount()))
                 .build();
+        if (transactionEntity.getTransactionType().equals(TransactionType.TRANSFER)){
+            transaction.setDestinationAccount(AccountEntityMapper.toAccount(transactionEntity.getDestinationAccount()));
+            transaction.setDestinationAccountId("%s".formatted(transactionEntity.getDestinationAccount().getAccountNumber()));
+        }
+        return transaction;
     }
 
 }

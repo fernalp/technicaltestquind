@@ -1,30 +1,25 @@
 package io.quind.technicaltesthexagonal.config;
 
-import io.quind.technicaltesthexagonal.modules.customer.application.services.CustomerService;
-import io.quind.technicaltesthexagonal.modules.customer.application.usecases.CreateCustomerUseCaseImpl;
-import io.quind.technicaltesthexagonal.modules.customer.application.usecases.DeleteCustomerUseCaseImpl;
-import io.quind.technicaltesthexagonal.modules.customer.application.usecases.RetrieveCustomerUseCaseImpl;
-import io.quind.technicaltesthexagonal.modules.customer.application.usecases.UpdateCustomerUseCaseImpl;
-import io.quind.technicaltesthexagonal.modules.customer.domain.ports.out.CustomerRepositoryPort;
-import io.quind.technicaltesthexagonal.modules.customer.infrastructure.repositories.JpaCustomerRepositoryAdapter;
+import io.quind.technicaltesthexagonal.modules.account.domain.ports.out.AccountRepositoryPort;
+import io.quind.technicaltesthexagonal.modules.transaction.application.services.TransactionService;
+import io.quind.technicaltesthexagonal.modules.transaction.application.usecases.CreateTransactionUseCaseImpl;
+import io.quind.technicaltesthexagonal.modules.transaction.domain.ports.out.TransactionRepositoryPort;
+import io.quind.technicaltesthexagonal.modules.transaction.infrastructure.repositories.JpaTransactionRepositoryAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class TransactionConfig {
 
-//    @Bean
-//    public CustomerService customerService(CustomerRepositoryPort customerRepositoryPort){
-//        return new CustomerService(
-//                new CreateCustomerUseCaseImpl(customerRepositoryPort),
-//                new RetrieveCustomerUseCaseImpl(customerRepositoryPort),
-//                new UpdateCustomerUseCaseImpl(customerRepositoryPort),
-//                new DeleteCustomerUseCaseImpl(customerRepositoryPort)
-//        );
-//    }
+    @Bean
+    public TransactionService transactionService(TransactionRepositoryPort transactionRepositoryPort, AccountRepositoryPort accountRepositoryPort){
+        return new TransactionService(
+                new CreateTransactionUseCaseImpl(transactionRepositoryPort, accountRepositoryPort)
+        );
+    }
 
-//    @Bean
-//    public CustomerRepositoryPort customerRepositoryPort(JpaCustomerRepositoryAdapter jpaCustomerRepositoryAdapter){
-//        return jpaCustomerRepositoryAdapter;
-//    }
+    @Bean
+    public TransactionRepositoryPort transactionRepositoryPort(JpaTransactionRepositoryAdapter transactionRepositoryAdapter){
+        return transactionRepositoryAdapter;
+    }
 }

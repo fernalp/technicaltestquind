@@ -3,6 +3,7 @@ package io.quind.technicaltesthexagonal.modules.customer.infrastructure.controll
 import io.quind.technicaltesthexagonal.modules.customer.application.services.CustomerService;
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerRequest;
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerResponse;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+
 @RequestMapping("/api/v1/customers")
 public class CustomerController {
 
@@ -20,7 +22,7 @@ public class CustomerController {
     }
 
     @PostMapping()
-    public ResponseEntity<CustomerResponse> createCustomer(@RequestBody CustomerRequest customerRequest){
+    public ResponseEntity<CustomerResponse> createCustomer(@Valid @RequestBody CustomerRequest customerRequest){
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(customerService.createCustomer(customerRequest));
         }catch (Exception e){

@@ -3,13 +3,14 @@ package io.quind.technicaltesthexagonal.modules.customer.domain.mappers;
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerRequest;
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerResponse;
 import io.quind.technicaltesthexagonal.modules.customer.domain.models.Customer;
+import io.quind.technicaltesthexagonal.modules.customer.domain.models.IdType;
 
 
 public class CustomerMapper {
 
     public static Customer fromCustomerRequest(CustomerRequest customerRequest){
         return Customer.builder()
-                .idType(customerRequest.getIdType())
+                .idType(IdType.valueOf(customerRequest.getIdType()))
                 .idNumber(customerRequest.getIdNumber())
                 .firstname(customerRequest.getFirstname().trim().toLowerCase())
                 .lastname(customerRequest.getLastname().trim().toLowerCase())

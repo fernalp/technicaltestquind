@@ -24,13 +24,7 @@ public class CustomerController {
 
     @PostMapping()
     public ResponseEntity<CustomerResponse> createCustomer(@Valid @RequestBody CustomerRequest customerRequest){
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(customerService.createCustomer(customerRequest));
-        }catch (AlreadyExistException e){
-            throw new AlreadyExistException(e.getMessage());
-        }catch (Exception e){
-            throw new RuntimeException(e.getMessage());
-        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(customerService.createCustomer(customerRequest));
     }
 
     @GetMapping()

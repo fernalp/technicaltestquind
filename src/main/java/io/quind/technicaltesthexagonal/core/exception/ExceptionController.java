@@ -1,9 +1,9 @@
 package io.quind.technicaltesthexagonal.core.exception;
 
 import io.quind.technicaltesthexagonal.modules.customer.application.exceptions.AlreadyExistException;
+import io.quind.technicaltesthexagonal.modules.customer.application.exceptions.YoungerException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -16,7 +16,7 @@ import java.util.Map;
 @RestControllerAdvice
 public class ExceptionController {
 
-    @ExceptionHandler({MethodArgumentNotValidException.class})
+    @ExceptionHandler({MethodArgumentNotValidException.class, YoungerException.class, IllegalArgumentException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, Object> validBadRequestResponse(MethodArgumentNotValidException e){
         Map<String, Object> errorResponse = new HashMap<>();
@@ -46,5 +46,6 @@ public class ExceptionController {
         errorResponse.put("message", e.getMessage());
         return errorResponse;
     }
+
 
 }

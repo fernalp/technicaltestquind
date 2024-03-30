@@ -2,6 +2,7 @@ package io.quind.technicaltesthexagonal.modules.customer.application.usecases;
 
 import io.quind.technicaltesthexagonal.core.utils.UtilsCustomer;
 import io.quind.technicaltesthexagonal.modules.customer.application.exceptions.AlreadyExistException;
+import io.quind.technicaltesthexagonal.modules.customer.application.exceptions.YoungerException;
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerRequest;
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerResponse;
 import io.quind.technicaltesthexagonal.modules.customer.domain.mappers.CustomerMapper;
@@ -19,10 +20,10 @@ public class CreateCustomerUseCaseImpl implements CreateCustomerUseCase {
 
     @Override
     public CustomerResponse createCustomer(CustomerRequest customerRequest) {
-        UtilsCustomer.validateCustomerRequest(customerRequest);
-        if (true) {
-            throw new AlreadyExistException("Email already exist!");
-        }
+        var utils = new UtilsCustomer(customerRepositoryPort);
+        utils.validateAgeByDate(customerRequest.getDateOfBirth());
+        utils.validateIdNumber(customerRequest.getIdNumber());
+        utils.validateEmail(customerRequest.getEmail());
         Customer customer = CustomerMapper.fromCustomerRequest(customerRequest);
         return CustomerMapper.toCustomerResponse(customerRepositoryPort.save(customer));
     }

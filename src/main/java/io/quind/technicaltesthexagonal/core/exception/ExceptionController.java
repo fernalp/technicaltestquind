@@ -1,7 +1,9 @@
 package io.quind.technicaltesthexagonal.core.exception;
 
+import io.quind.technicaltesthexagonal.modules.customer.application.exceptions.AlreadyExistException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -21,7 +23,27 @@ public class ExceptionController {
         var error = e.getFieldErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage);
         errorResponse.put("date", LocalDateTime.now());
         errorResponse.put("status", HttpStatus.BAD_REQUEST.value());
-        errorResponse.put("error", error);
+        errorResponse.put("message", error);
+        return errorResponse;
+    }
+
+    @ExceptionHandler({AlreadyExistException.class})
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public Map<String, Object> conflictResponse(Exception e){
+        Map<String, Object> errorResponse = new HashMap<>();
+        errorResponse.put("date", LocalDateTime.now());
+        errorResponse.put("status", HttpStatus.CONFLICT.value());
+        errorResponse.put("message", e.getMessage());
+        return errorResponse;
+    }
+
+    @ExceptionHandler({RuntimeException.class})
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Map<String, Object> internalServerError(Exception e){
+        Map<String, Object> errorResponse = new HashMap<>();
+        errorResponse.put("date", LocalDateTime.now());
+        errorResponse.put("status", HttpStatus.CONFLICT.value());
+        errorResponse.put("message", e.getMessage());
         return errorResponse;
     }
 

@@ -50,4 +50,14 @@ public class JpaCustomerRepositoryAdapter implements CustomerRepositoryPort {
     public boolean existById(Long id) {
         return jpaCustomerRepository.existsById(id);
     }
+
+    @Override
+    public boolean existEmail(String email) {
+        return jpaCustomerRepository.existsByEmail(email);
+    }
+
+    @Override
+    public boolean existIdNumber(String idNumber) {
+        return jpaCustomerRepository.existsByIdNumber(idNumber);
+    }
 }

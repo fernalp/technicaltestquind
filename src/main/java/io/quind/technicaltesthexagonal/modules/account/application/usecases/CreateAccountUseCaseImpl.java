@@ -1,6 +1,6 @@
 package io.quind.technicaltesthexagonal.modules.account.application.usecases;
 
-import io.quind.technicaltesthexagonal.modules.account.application.utils.UtilsAccount;
+import io.quind.technicaltesthexagonal.core.utils.UtilsAccount;
 import io.quind.technicaltesthexagonal.modules.account.domain.dtos.AccountRequest;
 import io.quind.technicaltesthexagonal.modules.account.domain.dtos.AccountResponse;
 import io.quind.technicaltesthexagonal.modules.account.domain.mappers.AccountMapper;

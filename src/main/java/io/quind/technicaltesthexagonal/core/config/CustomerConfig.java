@@ -1,4 +1,4 @@
-package io.quind.technicaltesthexagonal.config;
+package io.quind.technicaltesthexagonal.core.config;
 
 import io.quind.technicaltesthexagonal.modules.account.domain.ports.out.AccountRepositoryPort;
 import io.quind.technicaltesthexagonal.modules.customer.application.services.CustomerService;

@@ -1,4 +1,4 @@
-package io.quind.technicaltesthexagonal.modules.customer.application.utils;
+package io.quind.technicaltesthexagonal.core.utils;
 
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerRequest;
 

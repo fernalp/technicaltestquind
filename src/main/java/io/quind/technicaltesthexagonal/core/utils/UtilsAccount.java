@@ -1,4 +1,4 @@
-package io.quind.technicaltesthexagonal.modules.account.application.utils;
+package io.quind.technicaltesthexagonal.core.utils;
 
 import io.quind.technicaltesthexagonal.modules.account.domain.models.AccountType;
 

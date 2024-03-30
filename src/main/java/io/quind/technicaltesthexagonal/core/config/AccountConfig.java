@@ -1,4 +1,4 @@
-package io.quind.technicaltesthexagonal.config;
+package io.quind.technicaltesthexagonal.core.config;
 
 import io.quind.technicaltesthexagonal.modules.account.application.services.AccountService;
 import io.quind.technicaltesthexagonal.modules.account.application.usecases.CreateAccountUseCaseImpl;

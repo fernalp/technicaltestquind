@@ -1,6 +1,6 @@
 package io.quind.technicaltesthexagonal.modules.customer.application.usecases;
 
-import io.quind.technicaltesthexagonal.modules.customer.application.utils.UtilsCustomer;
+import io.quind.technicaltesthexagonal.core.utils.UtilsCustomer;
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerRequest;
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerResponse;
 import io.quind.technicaltesthexagonal.modules.customer.domain.mappers.CustomerMapper;

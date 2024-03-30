@@ -1,10 +1,11 @@
 package io.quind.technicaltesthexagonal.modules.customer.application.usecases;
 
-import io.quind.technicaltesthexagonal.modules.customer.application.utils.UtilsCustomer;
+import io.quind.technicaltesthexagonal.core.utils.UtilsCustomer;
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerRequest;
 import io.quind.technicaltesthexagonal.modules.customer.domain.dtos.CustomerResponse;
 import io.quind.technicaltesthexagonal.modules.customer.domain.mappers.CustomerMapper;
 import io.quind.technicaltesthexagonal.modules.customer.domain.models.Customer;
+import io.quind.technicaltesthexagonal.modules.customer.domain.models.IdType;
 import io.quind.technicaltesthexagonal.modules.customer.domain.ports.in.UpdateCustomerUseCase;
 import io.quind.technicaltesthexagonal.modules.customer.domain.ports.out.CustomerRepositoryPort;
 
@@ -26,7 +27,7 @@ public class UpdateCustomerUseCaseImpl implements UpdateCustomerUseCase {
             Customer customerUpdated = customer.get();
             customerUpdated.setFirstname(customerRequest.getFirstname());
             customerUpdated.setLastname(customerRequest.getLastname());
-            customerUpdated.setIdType(customerRequest.getIdType());
+            customerUpdated.setIdType(IdType.valueOf(customerRequest.getIdType()));
             customerUpdated.setIdNumber(customerRequest.getIdNumber());
             customerUpdated.setEmail(customerRequest.getEmail());
             customerUpdated.setDateOfBirth(customerRequest.getDateOfBirth());

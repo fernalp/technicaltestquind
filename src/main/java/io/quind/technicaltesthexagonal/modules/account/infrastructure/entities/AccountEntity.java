@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -39,15 +38,15 @@ public class AccountEntity {
     private BigDecimal balance;
     @Column(nullable = false)
     private boolean gmfExempt;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     private LocalDateTime updatedAt;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "customerId")
+    @JoinColumn(name = "customer_id")
     private CustomerEntity customer;
     @OneToMany(
             mappedBy = "originAccount"

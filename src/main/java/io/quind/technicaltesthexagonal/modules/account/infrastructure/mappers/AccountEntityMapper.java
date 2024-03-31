@@ -2,7 +2,6 @@ package io.quind.technicaltesthexagonal.modules.account.infrastructure.mappers;
 
 import io.quind.technicaltesthexagonal.modules.account.domain.models.Account;
 import io.quind.technicaltesthexagonal.modules.account.infrastructure.entities.AccountEntity;
-import io.quind.technicaltesthexagonal.modules.customer.infrastructure.entities.CustomerEntity;
 import io.quind.technicaltesthexagonal.modules.customer.infrastructure.mappers.CustomerEntityMapper;
 
 public class AccountEntityMapper {

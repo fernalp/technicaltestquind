@@ -1,6 +1,7 @@
 package io.quind.technicaltesthexagonal.modules.account.infrastructure.repositories;
 
 import io.quind.technicaltesthexagonal.modules.account.domain.models.Account;
+import io.quind.technicaltesthexagonal.modules.account.domain.models.AccountStatus;
 import io.quind.technicaltesthexagonal.modules.account.domain.ports.out.AccountRepositoryPort;
 import io.quind.technicaltesthexagonal.modules.account.infrastructure.entities.AccountEntity;
 import io.quind.technicaltesthexagonal.modules.account.infrastructure.mappers.AccountEntityMapper;
@@ -26,18 +27,13 @@ public class JpaAccountRepositoryAdapter implements AccountRepositoryPort {
     }
 
     @Override
-    public Optional<Account> findById(Long id) {
-        return jpaAccountRepository.findById(id).map(AccountEntityMapper::toAccount);
-    }
-
-    @Override
     public Optional<Account> findByAccountNumber(String accountNumber) {
         return jpaAccountRepository.findByAccountNumber(accountNumber).map(AccountEntityMapper::toAccount);
     }
 
     @Override
     public List<Account> findAll() {
-        return jpaAccountRepository.findAll().stream().map(AccountEntityMapper::toAccount).collect(Collectors.toList());
+        return jpaAccountRepository.findByAccountStatusNot(AccountStatus.CANCELED).stream().map(AccountEntityMapper::toAccount).collect(Collectors.toList());
     }
 
     @Override
@@ -51,13 +47,8 @@ public class JpaAccountRepositoryAdapter implements AccountRepositoryPort {
     }
 
     @Override
-    public Account update(Account account) {
-        AccountEntity accountEntity = AccountEntityMapper.fromAccount(account);
-        return AccountEntityMapper.toAccount(jpaAccountRepository.save(accountEntity));
+    public void deleteByAccountNumber(String accountNumber) {
+        jpaAccountRepository.deleteByAccountNumber(accountNumber);
     }
 
-    @Override
-    public boolean deleteById(Long id) {
-        return jpaAccountRepository.existsById(id);
-    }
 }

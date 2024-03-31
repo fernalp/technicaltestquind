@@ -9,10 +9,7 @@ import io.quind.technicaltesthexagonal.modules.account.domain.models.AccountStat
 import io.quind.technicaltesthexagonal.modules.account.domain.models.AccountType;
 import io.quind.technicaltesthexagonal.modules.account.domain.ports.in.CreateAccountUseCase;
 import io.quind.technicaltesthexagonal.modules.account.domain.ports.out.AccountRepositoryPort;
-import io.quind.technicaltesthexagonal.modules.customer.domain.models.Customer;
 import io.quind.technicaltesthexagonal.modules.customer.domain.ports.out.CustomerRepositoryPort;
-
-import java.util.Optional;
 
 public class CreateAccountUseCaseImpl implements CreateAccountUseCase {
 
@@ -28,27 +25,23 @@ public class CreateAccountUseCaseImpl implements CreateAccountUseCase {
     @Override
     public AccountResponse createAccount(AccountRequest accountRequest) {
 
+        var utils = new UtilsAccount(accountRepositoryPort);
+
         Account account = AccountMapper.fromAccountRequest(accountRequest);
-        Optional<Customer> customer = customerRepositoryPort.findById(accountRequest.getCustomerId());
 
-        String numberAccount = UtilsAccount.generateAccountNumber(account.getAccountType());
-        while (accountRepositoryPort.existsByAccountNumber(numberAccount)){
-            numberAccount = UtilsAccount.generateAccountNumber(account.getAccountType());
-        }
-        account.setAccountNumber(numberAccount);
+        // We assign the client
+        account.setCustomer(customerRepositoryPort.findById(accountRequest.getCustomerId()).orElseThrow(
+                () -> new RuntimeException("There is no client with the id "+ accountRequest.getCustomerId())
+        ));
 
-        if (account.getAccountType().equals(AccountType.ACC_SAVINGS)){
+        // We generate and assign the account number
+        account.setAccountNumber(utils.generateAccountNumber(account.getAccountType()));
+
+        if (account.getAccountType().equals(AccountType.ACC_SAVINGS)) {
             account.setAccountStatus(AccountStatus.ACTIVE);
-        }else{
-            account.setAccountStatus(AccountStatus.INACTIVE);
         }
-        UtilsAccount.isBalanceGreaterThanZero(account.getBalance());
-        customer.ifPresent(account::setCustomer);
-        try{
-            return AccountMapper.toAccountResponse(accountRepositoryPort.save(account));
-        }catch (Exception e){
-            throw new IllegalArgumentException(e.getMessage());
-        }
+
+        return AccountMapper.toAccountResponse(accountRepositoryPort.save(account));
     }
 
 

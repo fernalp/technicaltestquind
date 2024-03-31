@@ -17,13 +17,6 @@ public class RetrieveAccountUseCaseImpl implements RetrieveAccountUseCase {
         this.accountRepositoryPort = accountRepositoryPort;
     }
 
-
-    @Override
-    public Optional<AccountResponse> findById(Long id) {
-        return accountRepositoryPort.findById(id)
-                .map(AccountMapper::toAccountResponse);
-    }
-
     @Override
     public Optional<AccountResponse> findByAccountNumber(String accountNumber) {
         return accountRepositoryPort.findByAccountNumber(accountNumber)

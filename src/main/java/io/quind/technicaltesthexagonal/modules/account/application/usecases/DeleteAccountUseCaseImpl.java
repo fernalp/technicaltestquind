@@ -1,38 +1,30 @@
 package io.quind.technicaltesthexagonal.modules.account.application.usecases;
 
+import io.quind.technicaltesthexagonal.core.utils.UtilsAccount;
 import io.quind.technicaltesthexagonal.modules.account.domain.models.Account;
 import io.quind.technicaltesthexagonal.modules.account.domain.models.AccountStatus;
 import io.quind.technicaltesthexagonal.modules.account.domain.ports.in.DeleteAccountUseCase;
 import io.quind.technicaltesthexagonal.modules.account.domain.ports.out.AccountRepositoryPort;
 
-import java.math.BigDecimal;
-import java.util.Optional;
-
-
 public class DeleteAccountUseCaseImpl implements DeleteAccountUseCase {
-
     private final AccountRepositoryPort accountRepositoryPort;
-
     public DeleteAccountUseCaseImpl(AccountRepositoryPort accountRepositoryPort) {
         this.accountRepositoryPort = accountRepositoryPort;
     }
 
-
     @Override
-    public boolean deleteAccount(Long id) {
+    public void deleteAccount(String accountNumber) {
 
-        Optional<Account> account = accountRepositoryPort.findById(id);
+        var utils = new UtilsAccount(accountRepositoryPort);
 
-        if (account.isEmpty()) {
-            throw new IllegalArgumentException("This account no exist");
-        }else {
-            Account acc = account.get();
-            if (acc.getBalance().compareTo(BigDecimal.ZERO) != 0) {
-                throw new IllegalArgumentException("The account must be without funds to be canceled");
-            }
-            acc.setAccountStatus(AccountStatus.CANCELED);
-            accountRepositoryPort.save(acc);
-            return true;
-        }
+        Account account = accountRepositoryPort.findByAccountNumber(accountNumber)
+                .orElseThrow(() -> new RuntimeException("This account "+ accountNumber + " is invalid!"));
+
+        if (utils.isBalanceGreaterThanZero(account.getBalance()))
+            throw new RuntimeException("This account must be at 0 to be eliminated");
+
+        account.setAccountStatus(AccountStatus.CANCELED);
+        accountRepositoryPort.save(account);
+
     }
 }

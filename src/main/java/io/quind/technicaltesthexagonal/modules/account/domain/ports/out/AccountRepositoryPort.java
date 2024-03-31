@@ -8,10 +8,9 @@ import java.util.Optional;
 public interface AccountRepositoryPort {
 
     Account save(Account account);
-    Optional<Account> findById(Long id);
     Optional<Account> findByAccountNumber(String accountNumber);
     List<Account> findAll();
     List<Account> findAllByCustomerById(Long id);
     boolean existsByAccountNumber(String accountNumber);
-    boolean deleteById(Long id);
+    void deleteByAccountNumber(String accountNumber);
 }

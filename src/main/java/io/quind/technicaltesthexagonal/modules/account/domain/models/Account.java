@@ -8,7 +8,6 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class Account {
     private AccountStatus accountStatus;
     private BigDecimal balance;
     private boolean gmfExempt;
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private Long customerId;
     @JsonManagedReference

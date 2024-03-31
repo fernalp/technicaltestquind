@@ -38,17 +38,8 @@ public class JpaCustomerRepositoryAdapter implements CustomerRepositoryPort {
 
 
     @Override
-    public boolean deleteById(Long id) {
-        if (jpaCustomerRepository.existsById(id)){
-            jpaCustomerRepository.deleteById(id);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean existById(Long id) {
-        return jpaCustomerRepository.existsById(id);
+    public void deleteById(Long id) {
+        jpaCustomerRepository.deleteById(id);
     }
 
     @Override

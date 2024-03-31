@@ -13,6 +13,5 @@ public interface AccountRepositoryPort {
     List<Account> findAll();
     List<Account> findAllByCustomerById(Long id);
     boolean existsByAccountNumber(String accountNumber);
-    Account update(Account account);
     boolean deleteById(Long id);
 }

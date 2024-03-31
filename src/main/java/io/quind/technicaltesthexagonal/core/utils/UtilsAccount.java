@@ -1,30 +1,41 @@
 package io.quind.technicaltesthexagonal.core.utils;
 
 import io.quind.technicaltesthexagonal.modules.account.domain.models.AccountType;
+import io.quind.technicaltesthexagonal.modules.account.domain.ports.out.AccountRepositoryPort;
 
 import java.math.BigDecimal;
 import java.util.Random;
 
 public class UtilsAccount {
 
-    public static String generateAccountNumber(
-            AccountType accountType
-    ) {
-        if (accountType.equals(AccountType.ACC_CHECKING)){
-            return "33"+generateRandomNumber();
-        }
-        else {
-            return "53"+generateRandomNumber();
-        }
+    private final AccountRepositoryPort accountRepositoryPort;
+
+    public UtilsAccount(AccountRepositoryPort accountRepositoryPort) {
+        this.accountRepositoryPort = accountRepositoryPort;
     }
 
-    public static void isBalanceGreaterThanZero(BigDecimal balance){
-        if (balance.compareTo(BigDecimal.ZERO) < 0){
-            throw new IllegalArgumentException("The account cannot have negative funds");
-        }
+    public String generateAccountNumber(AccountType accountType) {
+        String accountNumber;
+        do {
+            if (accountType.equals(AccountType.ACC_CHECKING)){
+                accountNumber = "33"+ generateRandomNumber();
+            }
+            else {
+                accountNumber = "53"+ generateRandomNumber();
+            }
+        } while (existAccountNumber(accountNumber));
+
+        return accountNumber;
     }
 
-    private static String generateRandomNumber(){
+    public boolean isBalanceGreaterThanZero(BigDecimal balance){
+        return balance.compareTo(BigDecimal.ZERO) > 0;
+    }
+
+    private boolean existAccountNumber(String accountNumber){
+        return accountRepositoryPort.existsByAccountNumber(accountNumber);
+    }
+    private String generateRandomNumber(){
         Random random = new Random();
         StringBuilder randomNumber = new StringBuilder();
 

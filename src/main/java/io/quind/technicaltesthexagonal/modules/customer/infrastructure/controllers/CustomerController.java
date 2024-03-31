@@ -9,10 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
-
 @RequestMapping("/api/v1/customers")
 public class CustomerController {
 
@@ -23,7 +25,7 @@ public class CustomerController {
     }
 
     @PostMapping()
-    public ResponseEntity<CustomerResponse> createCustomer(@Valid @RequestBody CustomerRequest customerRequest){
+    public ResponseEntity<?> createCustomer(@Valid @RequestBody CustomerRequest customerRequest){
         return ResponseEntity.status(HttpStatus.CREATED).body(customerService.createCustomer(customerRequest));
     }
 
@@ -45,24 +47,13 @@ public class CustomerController {
 
     @PutMapping("/{customerId}")
     public ResponseEntity<CustomerResponse> updateCustomer(@PathVariable("customerId") Long id, @RequestBody CustomerRequest customerRequest){
-        System.out.println(customerRequest);
-        try {
-            return ResponseEntity.ok(customerService.updateCustomer(id, customerRequest));
-        }catch (Exception e){
-            throw new RuntimeException(e.getMessage());
-        }
-
+        return ResponseEntity.ok(customerService.updateCustomer(id, customerRequest));
     }
 
     @DeleteMapping("/{customerId}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable("customerId") Long id){
-        if (customerService.getCustomerById(id).isPresent()){
-            customerService.deleteCustomer(id);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }
-        else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
+        customerService.deleteCustomer(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -1,7 +1,10 @@
 package io.quind.technicaltesthexagonal.modules.customer.infrastructure.mappers;
 
+import io.quind.technicaltesthexagonal.modules.account.infrastructure.mappers.AccountEntityMapper;
 import io.quind.technicaltesthexagonal.modules.customer.domain.models.Customer;
 import io.quind.technicaltesthexagonal.modules.customer.infrastructure.entities.CustomerEntity;
+
+import java.util.stream.Collectors;
 
 
 public class CustomerEntityMapper {

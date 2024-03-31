@@ -4,6 +4,7 @@ import io.quind.technicaltesthexagonal.modules.customer.application.exceptions.A
 import io.quind.technicaltesthexagonal.modules.customer.application.exceptions.YoungerException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -15,35 +16,27 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class ExceptionController {
+    @ExceptionHandler({RuntimeException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, Object> internalServerError(RuntimeException e){
+        Map<String, Object> errorResponse = new HashMap<>();
+        errorResponse.put("date", LocalDateTime.now());
+        errorResponse.put("status", HttpStatus.BAD_REQUEST.value());
+        errorResponse.put("message", e.getMessage());
+        return errorResponse;
+    }
 
-    @ExceptionHandler({MethodArgumentNotValidException.class, YoungerException.class, IllegalArgumentException.class})
+    @ExceptionHandler({MethodArgumentNotValidException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, Object> validBadRequestResponse(MethodArgumentNotValidException e){
         Map<String, Object> errorResponse = new HashMap<>();
-        var error = e.getFieldErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage);
+        var message = new HashMap<>();
+        e.getBindingResult().getFieldErrors().forEach(err -> {
+            message.put(err.getField(), err.getDefaultMessage());
+        });
         errorResponse.put("date", LocalDateTime.now());
         errorResponse.put("status", HttpStatus.BAD_REQUEST.value());
-        errorResponse.put("message", error);
-        return errorResponse;
-    }
-
-    @ExceptionHandler({AlreadyExistException.class})
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public Map<String, Object> conflictResponse(Exception e){
-        Map<String, Object> errorResponse = new HashMap<>();
-        errorResponse.put("date", LocalDateTime.now());
-        errorResponse.put("status", HttpStatus.CONFLICT.value());
-        errorResponse.put("message", e.getMessage());
-        return errorResponse;
-    }
-
-    @ExceptionHandler({RuntimeException.class})
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public Map<String, Object> internalServerError(Exception e){
-        Map<String, Object> errorResponse = new HashMap<>();
-        errorResponse.put("date", LocalDateTime.now());
-        errorResponse.put("status", HttpStatus.CONFLICT.value());
-        errorResponse.put("message", e.getMessage());
+        errorResponse.put("message", message);
         return errorResponse;
     }
 

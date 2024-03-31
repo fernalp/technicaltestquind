@@ -35,8 +35,8 @@ public class CustomerService implements CreateCustomerUseCase, RetrieveCustomerU
     }
 
     @Override
-    public boolean deleteCustomer(Long id) {
-        return deleteCustomerUseCase.deleteCustomer(id);
+    public void deleteCustomer(Long id) {
+        deleteCustomerUseCase.deleteCustomer(id);
     }
 
     @Override

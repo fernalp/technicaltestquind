@@ -15,10 +15,10 @@ public class Transaction {
     private BigDecimal amount;
     private TransactionType transactionType;
     private LocalDateTime date;
-    private String originAccountId;
-    private String destinationAccountId;
+    private String originAccountNumber;
+    private String destinationAccountNumber;
     @JsonManagedReference
     private Account originAccount;
     @JsonManagedReference
-    private Account destinationAccount; // Solo para transferencias;
+    private Account destinationAccount; // Only Transfers;
 }

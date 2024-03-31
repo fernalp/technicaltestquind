@@ -11,11 +11,11 @@ public class TransactionMapper {
     public static Transaction fromTransactionRequest(TransactionRequest transactionRequest){
         Transaction transaction = Transaction.builder()
                 .amount(transactionRequest.getAmount())
-                .transactionType(transactionRequest.getTransactionType())
-                .originAccountId(transactionRequest.getOriginAccountId())
+                .transactionType(TransactionType.valueOf(transactionRequest.getTransactionType()))
+                .originAccountNumber(transactionRequest.getOriginAccountNumber())
                 .build();
-        if (transactionRequest.getTransactionType().equals(TransactionType.TRANSFER)){
-            transaction.setDestinationAccountId(transactionRequest.getDestinationAccountId());
+        if (transactionRequest.getTransactionType().equals(TransactionType.TRANSFER.toString())){
+            transaction.setDestinationAccountNumber(transactionRequest.getDestinationAccountNumber());
         }
         return transaction;
     }

@@ -2,11 +2,13 @@ package io.quind.technicaltesthexagonal.modules.account.application.services;
 
 import io.quind.technicaltesthexagonal.modules.account.domain.dtos.AccountRequest;
 import io.quind.technicaltesthexagonal.modules.account.domain.dtos.AccountResponse;
+import io.quind.technicaltesthexagonal.modules.account.domain.dtos.UpdateAccountStatusRequest;
 import io.quind.technicaltesthexagonal.modules.account.domain.ports.in.CreateAccountUseCase;
 import io.quind.technicaltesthexagonal.modules.account.domain.ports.in.DeleteAccountUseCase;
 import io.quind.technicaltesthexagonal.modules.account.domain.ports.in.RetrieveAccountUseCase;
 import io.quind.technicaltesthexagonal.modules.account.domain.ports.in.UpdateAccountUseCase;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,14 +33,11 @@ public class AccountService implements CreateAccountUseCase, RetrieveAccountUseC
     }
 
     @Override
-    public boolean deleteAccount(Long id) {
-        return deleteAccountUseCase.deleteAccount(id);
+    public void deleteAccount(String accountNumber) {
+        deleteAccountUseCase.deleteAccount(accountNumber);
     }
 
-    @Override
-    public Optional<AccountResponse> findById(Long id) {
-        return retrieveAccountUseCase.findById(id);
-    }
+
 
     @Override
     public Optional<AccountResponse> findByAccountNumber(String accountNumber) {
@@ -55,14 +54,19 @@ public class AccountService implements CreateAccountUseCase, RetrieveAccountUseC
         return retrieveAccountUseCase.findAllByCustomerById(id);
     }
 
+
     @Override
-    public AccountResponse update(Long id, AccountRequest account) {
-        return updateAccountUseCase.update(id, account);
+    public AccountResponse updateAccountStatus(String accountNumber, UpdateAccountStatusRequest updateAccountStatusRequest) {
+        return updateAccountUseCase.updateAccountStatus(accountNumber, updateAccountStatusRequest);
     }
 
     @Override
-    public AccountResponse update(String accountNumber, AccountRequest account) {
-        return updateAccountUseCase.update(accountNumber, account);
+    public AccountResponse updateAccountBalance(String accountNumber, BigDecimal newBalance) {
+        return updateAccountUseCase.updateAccountBalance(accountNumber, newBalance);
     }
 
+    @Override
+    public void cancelAccount(String accountNumber) {
+        updateAccountUseCase.cancelAccount(accountNumber);
+    }
 }

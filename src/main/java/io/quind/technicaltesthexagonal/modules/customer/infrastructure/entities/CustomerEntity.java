@@ -11,6 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -39,18 +40,18 @@ public class CustomerEntity {
     @Temporal(TemporalType.DATE)
     @Column
     private LocalDate birthdate;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     @Column(
             updatable = false, nullable = false
     )
-    private LocalDate createdAt;
-    @Temporal(TemporalType.DATE)
+    private LocalDateTime createdAt;
+    @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     @Column(
             nullable = false
     )
-    private LocalDate updatedAt;
+    private LocalDateTime updatedAt;
 
     @OneToMany(
             fetch = FetchType.EAGER,

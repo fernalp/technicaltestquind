@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Builder
@@ -18,8 +19,8 @@ public class Customer {
     private String lastname;
     private String email;
     private LocalDate dateOfBirth;
-    private LocalDate createdAt;
-    private LocalDate updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     @JsonBackReference
     private List<Account> accounts;
 

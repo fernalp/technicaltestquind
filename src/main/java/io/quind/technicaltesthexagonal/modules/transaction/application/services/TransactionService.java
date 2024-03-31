@@ -13,10 +13,6 @@ public class TransactionService {
     }
 
     public TransactionResponse createTransaction(TransactionRequest transactionRequest){
-        try {
-            return createTransactionUseCase.createTransaction(transactionRequest);
-        }catch (Exception e){
-            throw new RuntimeException(e.getMessage());
-        }
+        return createTransactionUseCase.createTransaction(transactionRequest);
     }
 }

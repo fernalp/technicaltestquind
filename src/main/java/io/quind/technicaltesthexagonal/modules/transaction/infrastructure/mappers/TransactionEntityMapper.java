@@ -25,12 +25,12 @@ public class TransactionEntityMapper {
                 .amount(transactionEntity.getAmount())
                 .transactionType(transactionEntity.getTransactionType())
                 .date(transactionEntity.getDate())
-                .originAccountId(transactionEntity.getOriginAccount().getAccountNumber())
+                .originAccountNumber(transactionEntity.getOriginAccount().getAccountNumber())
                 .originAccount(AccountEntityMapper.toAccount(transactionEntity.getOriginAccount()))
                 .build();
         if (transactionEntity.getTransactionType().equals(TransactionType.TRANSFER)){
             transaction.setDestinationAccount(AccountEntityMapper.toAccount(transactionEntity.getDestinationAccount()));
-            transaction.setDestinationAccountId("%s".formatted(transactionEntity.getDestinationAccount().getAccountNumber()));
+            transaction.setDestinationAccountNumber("%s".formatted(transactionEntity.getDestinationAccount().getAccountNumber()));
         }
         return transaction;
     }

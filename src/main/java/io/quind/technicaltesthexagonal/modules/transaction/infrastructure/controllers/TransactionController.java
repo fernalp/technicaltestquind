@@ -3,6 +3,7 @@ package io.quind.technicaltesthexagonal.modules.transaction.infrastructure.contr
 import io.quind.technicaltesthexagonal.modules.transaction.application.services.TransactionService;
 import io.quind.technicaltesthexagonal.modules.transaction.domain.dtos.TransactionRequest;
 import io.quind.technicaltesthexagonal.modules.transaction.domain.dtos.TransactionResponse;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ public class TransactionController {
     }
 
     @PostMapping
-    public ResponseEntity<TransactionResponse> createTransaction(@RequestBody TransactionRequest transactionRequest){
+    public ResponseEntity<TransactionResponse> createTransaction(@Valid @RequestBody TransactionRequest transactionRequest){
         return ResponseEntity.status(HttpStatus.CREATED).body(transactionService.createTransaction(transactionRequest));
     }
 

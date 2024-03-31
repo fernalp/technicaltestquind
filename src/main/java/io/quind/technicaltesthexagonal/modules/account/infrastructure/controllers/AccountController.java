@@ -3,6 +3,8 @@ package io.quind.technicaltesthexagonal.modules.account.infrastructure.controlle
 import io.quind.technicaltesthexagonal.modules.account.application.services.AccountService;
 import io.quind.technicaltesthexagonal.modules.account.domain.dtos.AccountRequest;
 import io.quind.technicaltesthexagonal.modules.account.domain.dtos.AccountResponse;
+import io.quind.technicaltesthexagonal.modules.account.domain.dtos.UpdateAccountStatusRequest;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,10 +21,8 @@ public class AccountController {
     }
 
     @PostMapping
-    public ResponseEntity<AccountResponse> createAccount(@RequestBody AccountRequest accountRequest){
-
+    public ResponseEntity<AccountResponse> createAccount(@Valid @RequestBody AccountRequest accountRequest){
         return ResponseEntity.ok(accountService.createAccount(accountRequest));
-
     }
 
     @GetMapping
@@ -34,31 +34,22 @@ public class AccountController {
         return ResponseEntity.ok(accountResponses);
     }
 
-//    @GetMapping("/{accountId}")
-//    public ResponseEntity<AccountResponse> getAccountById(@PathVariable("accountId") Long id){
-//        return accountService.findById(id)
-//                .map(ResponseEntity::ok)
-//                .orElse(ResponseEntity.notFound().build());
-//    }
-
-    @GetMapping("/{accountNumber}")
-    public ResponseEntity<AccountResponse> getAccountByAccountNumber(@PathVariable("accountNumber") String accountNumber){
+    @GetMapping("/{account-number}")
+    public ResponseEntity<AccountResponse> getAccountByAccountNumber(@PathVariable("account-number") String accountNumber){
         return accountService.findByAccountNumber(accountNumber)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/{accountId}")
-    public ResponseEntity<AccountResponse> updateAccount(@PathVariable("accountId") Long id, @RequestBody AccountRequest accountRequest){
-        return ResponseEntity.ok(accountService.update(id, accountRequest));
+    @PatchMapping("/{account-number}/status")
+    public ResponseEntity<AccountResponse> updateAccountStatus(@PathVariable("account-number") String accountNumber, @Valid @RequestBody UpdateAccountStatusRequest updateAccountStatusRequest){
+        return ResponseEntity.ok(accountService.updateAccountStatus(accountNumber, updateAccountStatusRequest));
     }
 
-    @DeleteMapping("/{accountId}")
-    public ResponseEntity<Void> deleteAccount(@PathVariable("accountId") Long id){
-        if (accountService.deleteAccount(id)){
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.badRequest().build();
+    @PatchMapping("/{account-number}/cancel")
+    public ResponseEntity<Void> deleteAccount(@PathVariable("account-number") String accountNumber){
+        accountService.cancelAccount(accountNumber);
+        return ResponseEntity.noContent().build();
     }
 
 }

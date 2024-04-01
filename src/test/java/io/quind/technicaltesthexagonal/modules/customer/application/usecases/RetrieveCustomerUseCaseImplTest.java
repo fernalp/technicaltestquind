@@ -84,7 +84,10 @@ class RetrieveCustomerUseCaseImplTest {
         when(customerRepositoryPort.findAll()).thenReturn(customers);
         List<CustomerResponse> customerResponses = retrieveCustomerUseCase.getAllCustomer();
         assertThat(customerResponses).isNotNull().hasSize(2);
+    }
 
+    @Test
+    void useCase_GetAllCustomer_ReturnListEmpty() {
         when(customerRepositoryPort.findAll()).thenReturn(List.of());
         List<CustomerResponse> customerResponsesEmpty = retrieveCustomerUseCase.getAllCustomer();
         assertThat(customerResponsesEmpty).isEmpty();

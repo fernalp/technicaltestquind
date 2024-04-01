@@ -30,7 +30,7 @@ public class UtilsCustomer {
     }
     public void validateEmail(String email){
         if (customerRepositoryPort.existEmail(email)){
-            throw new AlreadyExistException("Email "+ email + "already exist!");
+            throw new AlreadyExistException("Email "+ email + " already exist!");
         }
     }
 

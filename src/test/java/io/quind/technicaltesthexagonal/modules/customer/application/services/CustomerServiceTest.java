@@ -104,7 +104,7 @@ class CustomerServiceTest {
     }
 
     @Test
-    void updateCustomer() {
+    void customerService_updateCustomer_ReturnCustomerResponse() {
         when(updateCustomerUseCase.updateCustomer(Mockito.anyLong(), Mockito.any(CustomerRequest.class))).thenReturn(customerResponse);
         CustomerResponse response = customerService.updateCustomer(1L, customerRequest);
         assertThat(response).isInstanceOf(CustomerResponse.class).isNotNull();

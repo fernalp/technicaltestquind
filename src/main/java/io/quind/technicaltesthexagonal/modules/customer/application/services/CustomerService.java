@@ -27,11 +27,7 @@ public class CustomerService implements CreateCustomerUseCase, RetrieveCustomerU
 
     @Override
     public CustomerResponse createCustomer(CustomerRequest customerRequest) {
-        try{
-            return createCustomerUseCase.createCustomer(customerRequest);
-        }catch (Exception e){
-            throw new RuntimeException(e.getMessage());
-        }
+        return createCustomerUseCase.createCustomer(customerRequest);
     }
 
     @Override
@@ -51,11 +47,7 @@ public class CustomerService implements CreateCustomerUseCase, RetrieveCustomerU
 
     @Override
     public CustomerResponse updateCustomer(Long id, CustomerRequest customerRequest) {
-        try {
-            return updateCustomerUseCase.updateCustomer(id, customerRequest);
-        }catch (Exception e){
-            throw new RuntimeException(e.getMessage());
-        }
+        return updateCustomerUseCase.updateCustomer(id, customerRequest);
     }
 
 

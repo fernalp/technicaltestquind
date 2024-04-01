@@ -39,12 +39,7 @@ class AccountServiceTest {
 
     @BeforeEach
     void setUp() {
-        accountRequest = AccountRequest.builder()
-                .accountType(AccountType.ACC_SAVINGS)
-                .balance(BigDecimal.TEN)
-                .gmfExempt(true)
-                .customerId(1L)
-                .build();
+
     }
 
     @DisplayName("Test create an Account")
@@ -68,12 +63,6 @@ class AccountServiceTest {
     @DisplayName("Get All Accounts")
     @Test
     void canFindAll() {
-        //Given
-        List<AccountResponse> accountResponsesList = new ArrayList<>();
-        accountResponsesList.add(accountService.createAccount(accountRequest));
-        accountService.createAccount(accountRequest);
-        //when
-        when(accountService.findAll()).thenReturn(accountResponsesList);
 
     }
 

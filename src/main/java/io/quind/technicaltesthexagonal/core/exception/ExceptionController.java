@@ -1,5 +1,7 @@
 package io.quind.technicaltesthexagonal.core.exception;
 
+import io.quind.technicaltesthexagonal.modules.customer.application.exceptions.AlreadyExistException;
+import io.quind.technicaltesthexagonal.modules.customer.application.exceptions.YoungerException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,12 +14,22 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class ExceptionController {
-    @ExceptionHandler({RuntimeException.class})
+    @ExceptionHandler({RuntimeException.class, YoungerException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, Object> internalServerError(RuntimeException e){
         Map<String, Object> errorResponse = new HashMap<>();
         errorResponse.put("date", LocalDateTime.now());
         errorResponse.put("status", HttpStatus.BAD_REQUEST.value());
+        errorResponse.put("message", e.getMessage());
+        return errorResponse;
+    }
+
+    @ExceptionHandler({AlreadyExistException.class})
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public Map<String, Object> handleAlreadyExistException(RuntimeException e){
+        Map<String, Object> errorResponse = new HashMap<>();
+        errorResponse.put("date", LocalDateTime.now());
+        errorResponse.put("status", HttpStatus.CONFLICT.value());
         errorResponse.put("message", e.getMessage());
         return errorResponse;
     }
